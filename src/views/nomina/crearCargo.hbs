@@ -1,0 +1,46 @@
+<div class="section container">
+    <div class="row">
+        <form action="/nomina/crearCargo" method="post" class="col s12">
+            <div class="row card-panel">
+               {{!-- CARGO --}}
+                <div class="input-field col s4">
+                    <input type="text" name="cargo_nombre" id="cargo_nombre">
+                    <label for="cargo_nombre">Cargo*</label>
+                </div>
+                {{!------AREA----- --}}
+                <div class="input-field col s4">
+                    <select class="select" name="cargo_area" id="cargo_area">
+                        <option value="" disabled selected>Selecciona la opción</option>
+                        {{#each dataAreas}}
+                        <option value="{{EST_CDETALLE1}}">{{EST_CDETALLE1}}</option> 
+                        {{/each}}
+                    </select>
+                    <label for="cargo_area">Área*</label>
+                </div>
+                {{!------STAFF---- --}}
+                <div class="input-field col s4">
+                    <select class="select" name="cargo_tipo" id="cargo_tipo">
+                        <option value="" disabled selected>Selecciona la opción</option>
+                        {{#each dataTipoCargo}}
+                        <option value="{{EST_CDETALLE2}}">{{EST_CDETALLE2}}</option> 
+                        {{/each}}
+                    </select>
+                    <label for="cargo_tipo">Tipo*</label>
+                </div>
+                <div class="input-field col s12">
+                    <div class="input-field col s4"></div>
+
+                    <div class="input-field col s4">
+                        <button class="btn waves-effect waves-light" type="submit" name="action">Guardar
+                            <i class="material-icons right">send</i>
+                        </button>
+                    </div>
+
+                    <div class="input-field col s4"></div>
+
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>

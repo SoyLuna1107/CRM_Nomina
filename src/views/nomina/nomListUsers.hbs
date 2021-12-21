@@ -1,0 +1,26 @@
+<div class="section container">
+  <div class="row">
+    <div class="row card-panel">
+      <table id="tabla">
+        <thead>
+          <tr>
+            <th>Documento</th>
+            <th>Nombre</th>
+            <th>Campañas</th>
+            <th>Salario</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each usuarios}}
+            <tr>
+              <td>{{this.CON_CDETALLE6}}</td>
+              <td>{{this.CON_CDETALLE10}}</td>
+              <td>{{this.CON_CDETALLE2}}</td>
+              <td>$</td>
+             </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

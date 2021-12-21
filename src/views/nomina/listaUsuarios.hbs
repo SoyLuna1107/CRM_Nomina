@@ -1,0 +1,28 @@
+<div class="section container">
+  <div class="row">
+    <div class="row card-panel">
+      <table id="tabla">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Cédula</th>
+            <th>Campaña</th>
+            <th>Estado</th>
+            <th>Acción</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each usuarios}}
+            <tr>
+              <td>{{this.CON_CDETALLE10}}</td>
+              <td>{{this.CON_CDETALLE6}}</td>
+              <td>{{this.CON_CDETALLE2}}</td>
+              <td>{{this.CON_CESTADO}}</td>
+              <td><a class="btn" id="editar" href="/nomina/actualizarUsuario/{{this.EnCrypt}}"><i class='bx bx-edit-alt'></i></a></td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,272 @@
+<div class="section container">
+    <div class="row">
+        <form action="/nomina/crearUsuario" method="post" class="col s12">
+            <div class="row card-panel">
+                {{!-- ----Modalidad----- --}}
+                <div class="input-field col s4">
+                    <select class="select" name="modalidad" id="modalidad">
+                        <option value="" disabled selected>Selecciona la opción</option>
+                        <option value="Site 1">Site 1</option> 
+                        <option value="Site 5">Site 5</option> 
+                        <option value="Site 6">Site 6</option> 
+                        <option value="Site 7">Site 7</option> 
+                        <option value="Medellin">Medellin</option> 
+                        <option value="Barrabquilla">Barranquilla</option> 
+                        <option value="Cra 30 (ECallYou)">Cra 30 (ECallYou)</option> 
+                        <option value="Calle 80">Calle 80</option> 
+                        <option value="Edificio Caracol">Edificio Caracol</option> 
+                        <option value="Home Office">Home Office</option> 
+                    </select>
+                    <label for="modalidad">Modalidad*</label>
+                </div>
+                {{!-- ----Campaña----- --}}
+                <div class="input-field col s4">
+                    <select class="select" name="campaña" id="campaña">
+                        <option value="" disabled selected>Selecciona la opción</option>
+                        {{#each dataCampanas}}
+                        <option value="{{EST_CDETALLE1}}">{{EST_CDETALLE1}}</option> 
+                        {{/each}}
+                    </select>
+                    <label for="campaña">Campaña*</label>
+                </div>
+                {{!-- ----Cargo----- --}}
+                <div class="input-field col s4">
+                    <select class="select" name="cargo" id="cargo">
+                        <option value="" disabled selected>Selecciona la opción</option>
+                        {{#each dataCargos}}
+                        <option value="{{EST_CDETALLE}}">{{EST_CDETALLE}}</option> 
+                        {{/each}}
+                    </select>
+                    <label for="cargo">Cargo*</label>
+                </div>
+                {{!-- ----Login_ID----- --}}
+                <div class="input-field col s4">
+                    <input type="text" name="loguin_id" id="loguin_id">
+                    <label for="loguin_id">Loguin ID*</label>
+                </div>
+                {{!-- -----Cedula---- --}}
+                <div class="input-field col s4">
+                    <input type="text" name="cedula_crear_us" id="cedula_crear_us">
+                    <label for="cedula_crear_us">Cédula*</label>
+                </div>
+                {{!-- -----Nombre---- --}}
+                <div class="input-field col s4">
+                    <input type="text" name="full_name" id="full_name">
+                    <label for="full_name">Nombre Completo*</label>
+                </div>
+                {{!-- ----Jefe Inmediato----- --}}
+                <div class="input-field col s4">
+                    <select class="select" name="jefe_inm" id="jefe_inm">
+                        <option value="" disabled selected>Selecciona la opción</option>
+                        {{#each dataJefeInm}}
+                        <option value="{{CON_CDETALLE12}}">{{CON_CDETALLE12}}</option> 
+                        {{/each}}
+                    </select>
+                    <label for="jefe_inm">Jefe Inmediato*</label>
+                </div>
+                {{!-- ----Jefe de operacion----- --}}
+                <div class="input-field col s4">
+                    <select class="select" name="jefe_ope" id="jefe_ope">
+                        <option value="" disabled selected>Selecciona la opción</option>
+                        <option value="">opcion</option> 
+                        <option value="">opcion</option> 
+                    </select>
+                    <label for="jefe_ope">Jefe de Operación*</label>
+                </div>
+                {{!-- -----Tel fijo---- --}}
+                <div class="input-field col s4">
+                    <input type="text" name="tel_fijo" id="tel_fijo">
+                    <label for="tel_fijo">Telefono fijo</label>
+                </div>
+                {{!-- -----Tel celular---- --}}
+                <div class="input-field col s4">
+                    <input type="text" name="tel_celular" id="tel_celular">
+                    <label for="tel_celular">Telefono celular</label>
+                </div>
+                {{!--------Fecha nacimiento----------}}
+                <div class="input-field col s4">
+                    <input type="date" name="fecha_nacimiento" id="fecha_nacimiento">
+                    <label for="fecha_nacimiento">Fecha de nacimiento</label>
+                </div>
+                {{!-- ----Sexo----- --}}
+                <div class="input-field col s4">
+                    <select class="select" name="sexo" id="sexo">
+                        <option value="" disabled selected>Selecciona la opción</option>
+                        <option value="F">F</option> 
+                        <option value="M">M</option> 
+                    </select>
+                    <label for="sexo">Sexo</label>
+                </div>
+                {{!-- -----Direccion---- --}}
+                <div class="input-field col s4">
+                    <input type="text" name="direccion" id="direccion">
+                    <label for="direccion">Dirección</label>
+                </div>
+                {{!-- ----Grupo Sanguineo----- --}}
+                <div class="input-field col s4">
+                    <select class="select" name="Grupo_sanguineo" id="Grupo_sanguineo">
+                        <option value="" disabled selected>Selecciona la opción</option>
+                        <option value="">A+</option> 
+                        <option value="">A-</option>
+                        <option value="">B+</option>
+                        <option value="">B-</option>
+                        <option value="">O+</option>
+                        <option value="">O-</option>
+                        <option value="">AB+</option>
+                        <option value="">AB-</option> 
+                    </select>
+                    <label for="Grupo_sanguineo">Grupo Sanguíneo</label>
+                </div>
+                {{!-- -----EPS--- select??? --}}
+                <div class="input-field col s4">
+                    <input type="text" name="eps" id="eps">
+                    <label for="eps">EPS</label>
+                </div>
+                {{!-- -----Estado civil-----}}
+                <div class="input-field col s4">
+                    <select class="select" name="estado_civil" id="estado_civil">
+                        <option value="" disabled selected>Selecciona la opción</option>
+                        <option value="">Soltero</option> 
+                        <option value="">Casado</option>
+                        <option value="">Unión libre</option>
+                    </select>
+                    <label for="estado_civil">Estado civil</label>
+                </div>
+                {{!-- -----# de hijos--}}
+                <div class="input-field col s4">
+                    <input type="text" name="numero_hijos" id="numero_hijos">
+                    <label for="numero_hijos">No de hijos</label>
+                </div>
+                {{!--------Fecha ingreso--------se guarda automáticamente en el momento de guardar la persona ---}}
+                {{!-- <div class="input-field col s4">
+                    <input type="date" placeholder="Feha de ingreso" id="">
+                    <label for="">Fecha de ingreso a la campaña </label>
+                </div> --}}
+                {{!-- -----Nivel de estudios  select??--}}
+                <div class="input-field col s4">
+                    <input type="text" name="estudios" id="estudios">
+                    <label for="estudios">Nivel de Estudios</label>
+                </div>
+                {{!-- -----Usuario RR--}}
+                <div class="input-field col s4">
+                    <input type="text" name="usuario_rr" id="usuario_rr">
+                    <label for="usuario_rr">Usuario RR*</label>
+                </div>
+                {{!-- -----Usuario Ac--}}
+                <div class="input-field col s4">
+                    <input type="text" name="usuario_Ac" id="usuario_Ac">
+                    <label for="usuario_Ac">Usuario Ac*</label>
+                </div>
+                {{!-- -----correo--}}
+                <div class="input-field col s4">
+                    <input type="email" name="correo" id="correo">
+                    <label for="correo">Correo*</label>
+                </div>
+               {{!-- ----Estado se calcula por fecha de retiro------}}
+
+                {{!-- Fechas retiro --}}
+                <div class="input-field col s4">
+                    <input type="date" name="fecha_retiro" id="fecha_retiro">
+                    <label for="fecha_retiro">Fecha de retiro</label>
+                </div>
+
+                {{!-- -----causa de retiro--}}
+                <div class="input-field col s4">
+                    <select class="select" name="estado" id="estado">
+                        <option value="" disabled selected>Selecciona la opción</option>
+                        <option value="">BJ(Baja Justificada)</option> 
+                        <option value="">BV(Baja Voluntaria)</option> 
+                        <option value="">CC(Cambio de Campaña)</option>
+                        <option value="">OJT</option>
+                    </select>
+                    <label for="estado">Causa*</label>
+                </div>
+                {{!-- -----Detalle--}}
+                <div class="input-field col s4">
+                    <input type="text" name="detalle" id="detalle">
+                    <label for="detalle">Detalle*</label>
+                </div>
+                {{!------Operador internet---}}
+                <div class="input-field col s4">
+                    <input type="text" name="internet_hogar" id="internet_hogar">
+                    <label for="">Operador de internet HOGAR</label>
+                </div>
+                {{!------Megas de operador de internet Hogar---}}
+                <div class="input-field col s4">
+                    <input type="text" name="megas_internet_hogar" id="megas_internet_hogar">
+                    <label for="">MEGAS</label>
+                </div>
+                {{!------Localidad---}}
+                <div class="input-field col s4">
+                    <input type="text" name="localidad" id="localidad">
+                    <label for="localidad">Localidad</label>
+                </div>
+                {{!-----Barrio----}}
+                <div class="input-field col s4">
+                    <input type="text" name="barrio" id="barrio">
+                    <label for="barrio">Barrio</label>
+                </div>
+                {{!------Usuario de red ---}}
+                <div class="input-field col s4">
+                    <input type="text" name="usuario_red" id="usuario_red">
+                    <label for="usuario_red">Usuario de Red</label>
+                </div>
+                {{!------Estado Vacunacion---}}
+                <div class="input-field col s4">
+                    <select class="select" name="vacunado" id="vacunado">
+                        <option value="" disabled selected>Selecciona la opción</option>
+                        <option value="">Vacunado</option> 
+                        <option value="">No Vacunado</option> 
+                    </select>
+                    <label for="vacunado">Estado Vacunación</label>
+                </div>
+                {{!------Vacuna aplicada ---}}
+                <div class="input-field col s4">
+                    <input type="text" name="vacuna_aplicada" id="vacuna_aplicada">
+                    <label for="vacuna_aplicada">Vacuna aplicada</label>
+                </div>
+                {{!------Primera dosis---}}
+                <div class="input-field col s4">
+                    <select class="select" name="vac_primer_dosis" id="vac_primer_dosis">
+                        <option value="" disabled selected>Selecciona la opción</option>
+                        <option value="">SI</option> 
+                        <option value="">NO</option> 
+                    </select>
+                    <label for="vac_primer_dosis">Primer dosis</label>
+                </div>
+                {{!------Segunda dosis---}}
+                <div class="input-field col s4">
+                    <select class="select" name="vac_segunda_dosis" id="vac_segunda_dosis">
+                        <option value="" disabled selected>Selecciona la opción</option>
+                        <option value="">SI</option> 
+                        <option value="">NO</option> 
+                    </select>
+                    <label for="vac_segunda_dosis">Segunda dosis</label>
+                </div>
+                {{!------Tercera dosis---}}
+                <div class="input-field col s4">
+                    <select class="select" name="vac_tercer_dosis" id="vac_tercer_dosis">
+                        <option value="" disabled selected>Selecciona la opción</option>
+                        <option value="">SI</option> 
+                        <option value="">NO</option> 
+                    </select>
+                    <label for="vac_tercer_dosis">Tercera dosis</label>
+                </div>
+
+                <div class="input-field col s12">
+                    <div class="input-field col s4"></div>
+
+                    <div class="input-field col s4">
+                        <button class="btn waves-effect waves-light" type="submit" name="action">Guardar
+                            <i class="material-icons right">send</i>
+                        </button>
+                    </div>
+
+                    <div class="input-field col s4"></div>
+
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>
