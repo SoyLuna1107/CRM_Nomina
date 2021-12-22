@@ -26,9 +26,9 @@
                 {{!-- ----Campaña----- --}}
                 <div class="input-field col s4">
                     <select class="select" name="campaña" id="campaña" multiple>
-                        <option value="" disabled selected>Selecciona la opción</option>
+                        <option value="" disabled>Selecciona la opción</option>
                         {{#each usuarioAll}}
-                        <option value="{{CON_CDETALLE2}}">{{CON_CDETALLE2}}</option> 
+                        <option id="optionCam" value="{{EST_CDETALLE1}}">{{EST_CDETALLE1}}</option> 
                         {{/each}}
                     </select>
                     <label for="campaña">Campaña*</label>

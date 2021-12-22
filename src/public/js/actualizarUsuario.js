@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
   console.log(id);
 
   postData("/nomina/getUsuarioID", { id }).then((res) => {
-    console.log(res);
+    // console.log(res);
 
     function showSelectOnForm(options, select, dato) {
       options.forEach((elemOption) => {
@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
     const camOptions = document.querySelectorAll("#campaña option"),
       selectCamp = document.getElementById("campaña");
     showSelectOnForm(camOptions, selectCamp, res.CON_CDETALLE2);
-    console.log(selectCamp);
+    
 
     //select cargo (falta cargar listado desde DB)
     // const cargoOptions = document.querySelectorAll("#cargo option"),
@@ -58,5 +58,6 @@ document.addEventListener("DOMContentLoaded", (e) => {
     const vacunadoOptions = document.querySelectorAll("#vacunado option"),
       selectvacunado = document.getElementById("vacunado");
     showSelectOnForm(vacunadoOptions, selectvacunado, res.CON_CDETALLE45);
+
   });
 });

@@ -336,7 +336,7 @@ router.get("/actualizarUsuario/:id", (req, res) => {
     .query(sqlUsuarios, [id])
     .then(([result]) => {
       //consutar campañas
-      const sqlCampañas = "SELECT CON_CDETALLE2 FROM dbp_nomina.TBL_RCONTENIDO GROUP BY CON_CDETALLE2";
+      const sqlCampañas = "SELECT EST_CDETALLE1 FROM dbp_nomina.TBL_RESTANDAR WHERE EST_CCONSULTA='cmbCampaña' ORDER BY EST_CDETALLE1 asc";
       db.promise()
         .query(sqlCampañas)
         .then(([resultAll]) => {
@@ -432,7 +432,7 @@ router.post("/actualizarUsuario/:id", (req, res) => {
     vac_segunda_dosis,
     vac_tercer_dosis,
   } = req.body;
-  console.log(req.body);
+  // console.log(req.body);
   const updateUsuario = {
     CON_CDETALLE: modalidad,
     CON_CDETALLE1: "",
@@ -502,6 +502,13 @@ router.post("/actualizarUsuario/:id", (req, res) => {
   let fechaRetiro = new Date(updateUsuario["CON_CDETALLE31"].split("/").reverse().join("-"));
   fechaRetiro < currentDate ? (updateUsuario["CON_CESTADO"] = "Retiro") : (updateUsuario["CON_CESTADO"] = "Activo");
 
+  //separar camapañas para que sean insertadas
+  let campañastrasnver = updateUsuario["CON_CDETALLE2"];
+  campañastrasnver = campañastrasnver.join(",");
+  updateUsuario["CON_CDETALLE2"] = campañastrasnver;
+  // console.log('CAMPAÑAS',updateUsuario["CON_CDETALLE2"])
+  // console.log('CAMPAÑAS',campañastrasnver);
+
   const sqlUpdateUsuario = "UPDATE dbp_nomina.TBL_RCONTENIDO SET ? WHERE PKCON_NCODIGO = ?";
   db.promise()
 
@@ -511,9 +518,6 @@ router.post("/actualizarUsuario/:id", (req, res) => {
       res.redirect("/nomina/listaUsuarios");
     })
     .catch((err) => console.log("ERROR::", err));
-
-  // console.log(updateUsuario,id);
-  res.redirect("/nomina/listaUsuarios");
 });
 
 router.post("/getUsuarioID", (req, res) => {
@@ -605,7 +609,7 @@ router.get("/actualizarCargo/:id", (req, res) => {
 
             .query(sqlCargosTipo)
             .then(([resultTipo]) => {
-              res.render("nomina/actualizarCargo", { title: "Actualizar Cargos", idEncrypt: req.params.id, cargos: resultCargos[0], dataAreas: resultAreas, dataTipo:resultTipo});
+              res.render("nomina/actualizarCargo", { title: "Actualizar Cargos", idEncrypt: req.params.id, cargos: resultCargos[0], dataAreas: resultAreas, dataTipo: resultTipo });
             })
             .catch((err) => console.log("ERROR::", err));
         })
@@ -647,7 +651,7 @@ router.post("/actualizarCargo/:id", (req, res) => {
   const sqlnewCargo = "UPDATE dbp_nomina.TBL_RESTANDAR SET ? WHERE PKEST_NCODIGO = ?";
   db.promise()
 
-    .query(sqlnewCargo, [newCargo,id])
+    .query(sqlnewCargo, [newCargo, id])
     .then(([result]) => {
       // console.log(result);
       // req.flash("messageSuccess", `Cargo Actualizado`);
@@ -662,24 +666,90 @@ router.get("/nomListUsers", (req, res) => {
   const sqlUsuarios = "SELECT * FROM dbp_nomina.TBL_RCONTENIDO";
 
   db.promise()
-  .query(sqlUsuarios)
-  .then(([resultUsuarios])=>{
-    // res.send(resultUsuarios);
-    res.render("nomina/nomListUsers", {title:"Nomina Usuarios", usuarios:resultUsuarios});
-  });
-    
+    .query(sqlUsuarios)
+    .then(([resultUsuarios]) => {
+      // res.send(resultUsuarios);
+      res.render("nomina/nomListUsers", { title: "Nomina Usuarios", usuarios: resultUsuarios });
+    });
 });
-//Campañas
-router.get("/nomListCampanas", (req, res) => {
-  const sqlUsuarios = "SELECT * FROM dbp_nomina.TBL_RCONTENIDO";
+
+async function verificarCampanas() {
+  const sqlCampanias = "SELECT EST_CDETALLE1 FROM dbp_nomina.TBL_RESTANDAR WHERE EST_CCONSULTA='cmbCampaña' ORDER BY EST_CDETALLE1 asc";
 
   db.promise()
-  .query(sqlUsuarios)
-  .then(([resultUsuarios])=>{
-    // res.send(resultUsuarios);
-    res.render("nomina/nomListUsers", {title:"Nomina Usuarios", usuarios:resultUsuarios});
-  });
-    
+    .query(sqlCampanias)
+    .then(async ([resultCampanias]) => {
+      let countCampanias = [];
+
+      ArrayCampanas = [];
+      for (let index = 0; index < resultCampanias.length; index++) {
+        const sqlCountCampanias = "SELECT count(*) as numero from dbp_nomina.TBL_RCONTENIDO WHERE CON_CDETALLE2 = ?";
+
+        // console.log(element.EST_CDETALLE1);
+        await db
+          .promise()
+          .query(sqlCountCampanias, resultCampanias[index].EST_CDETALLE1)
+          .then(([resultCountCampanias2]) => {
+            countCampanias.push(resultCountCampanias2[0].numero);
+          });
+      }
+      res.render("nomina/nomListCampanas", { title: "Nomina Campañas", campanias: resultCampanias, countCampanias });
+    });
+}
+
+//Campañas
+router.get("/nomListCampanas", (req, res) => {
+  const sqlCampanias = "SELECT EST_CDETALLE1 FROM dbp_nomina.TBL_RESTANDAR WHERE EST_CCONSULTA='cmbCampaña' ORDER BY EST_CDETALLE1 asc";
+
+  db.promise()
+    .query(sqlCampanias)
+    .then(async ([resultCampanias]) => {
+      let countCampanias = [];
+
+      ArrayCampanas = [];
+      for (let index = 0; index < resultCampanias.length; index++) {
+        const sqlCountCampanias = "SELECT CON_CDETALLE2, count(*) as numero from dbp_nomina.TBL_RCONTENIDO WHERE CON_CDETALLE2 = ?";
+
+        // console.log(element.EST_CDETALLE1);
+        await db
+          .promise()
+          .query(sqlCountCampanias, resultCampanias[index].EST_CDETALLE1)
+          .then(([resultCountCampanias2]) => {
+            if (resultCountCampanias2[0].CON_CDETALLE2 != null) {
+              countCampanias.push(resultCountCampanias2);
+            }
+          });
+      }
+      console.log(countCampanias);
+      res.render("nomina/nomListCampanas", { title: "Nomina Campañas", countCampanias });
+    });
 });
+
+// router.get("/nomListCampanas", (req, res) => {
+//   const sqlCampañas = "SELECT EST_CDETALLE1 FROM dbp_nomina.TBL_RESTANDAR WHERE EST_CCONSULTA='cmbCampaña' ORDER BY EST_CDETALLE1 asc";
+
+//   db.promise()
+//   .query(sqlCampañas)
+//   .then(([resultCampañas]) => {
+//     // res.send(resultUsuarios);
+//     res.render("nomina/nomListCampanas", { title: "Nomina Campañas", campañas:resultCampañas});
+//   })
+//   .catch((err) => console.log("ERROR::", err));
+
+// });
+
+// router.get("/listaUsuarios", (req, res) => {
+//   const sqlUsuarios = "SELECT * FROM dbp_nomina.TBL_RCONTENIDO";
+//   db.promise()
+
+//     .query(sqlUsuarios)
+//     .then(([result]) => {
+//       for (let i = 0; i < result.length; i++) {
+//         result[i].EnCrypt = Class2.EnCrypt(`${result[i].PKCON_NCODIGO}`);
+//       }
+//       res.render("nomina/listaUsuarios", {title: "Lista Usuario", usuarios: result });
+//     })
+//     .catch((err) => console.log("ERROR::", err));
+// });
 
 module.exports = router;
