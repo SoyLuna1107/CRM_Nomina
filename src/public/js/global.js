@@ -77,6 +77,19 @@ const inputsMayus = (arrInputs = []) => {
     });
   });
 };
+
+const inputSoloNum = (arrInputs = []) => {
+  arrInputs.forEach((element) => {
+    element.addEventListener('keypress', (e) => {
+      if (e.charCode >= 48 && e.charCode <= 57) {
+        return true;
+      }
+      e.preventDefault();
+      return false;
+    });
+  });
+};
+
 // * limpiarCampos -> Limpia inputs Materialize - Misma idea de la function inputsMayus()
 const limpiarCampos = (arrInputs = []) => {
   arrInputs.forEach((element) => {

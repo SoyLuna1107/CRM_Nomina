@@ -9,8 +9,6 @@ const passport = require('passport');
 const { database } = require('./keys');
 const { isLoggedIn, error404 } = require('./lib/auth');
 const fileUpload = require('express-fileupload');
-// const cors = require('cors')
-// require("dotenv").config();
 
 // * Init
 const app = express();
@@ -75,6 +73,7 @@ app.use(require('./routes'));
 // ! app.use(isLoggedIn); // No entrar a las rutas sin logearse, redirecciona al Login
 app.use(require('./routes/user'));
 app.use('/nomina', require('./routes/nomina'));
+app.use('/nomina', require('./routes/nominaE'));
 
 // * Starting Server
 app.listen(app.get('PORT'), () => {
