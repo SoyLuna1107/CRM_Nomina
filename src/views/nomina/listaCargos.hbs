@@ -1,0 +1,25 @@
+<div class="section container">
+  <div class="row">
+    <div class="row card-panel">
+      <table id="tabla">
+        <thead>
+          <tr>
+            <th>Cargo</th>
+            <th>Área</th>
+            <th>Tipo</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each cargos}}
+            <tr>
+              <td>{{this.EST_CDETALLE}}</td>
+              <td>{{this.EST_CDETALLE1}}</td>
+              <td>{{this.EST_CDETALLE2}}</td>
+              <td><a class="btn" id="editar" href="/nomina/actualizarCargo/{{this.EnCrypt}}"><i class='bx bx-edit-alt'></i></a></td>
+             </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

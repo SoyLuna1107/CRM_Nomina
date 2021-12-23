@@ -1,0 +1,46 @@
+<h1>Hello</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Item Name</th>
+      <th>Item Price</th>
+    </tr>
+  </thead>
+
+  <tbody>
+      {{#each dataNomina}}
+    <tr>
+      
+        <td>{{this}}</td>
+      
+    </tr>
+    {{/each}}
+    <tr>
+      <td>Alan</td>
+      <td>Jellybean</td>
+      <td>$3.76</td>
+    </tr>
+    <tr>
+      <td>Jonathan</td>
+      <td>Lollipop</td>
+      <td>$7.00</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>Cargar Excel</h2>
+
+<form action="/nomina/enviarExcel" method="POST" enctype="multipart/form-data">
+  <div class="file-field input-field">
+    <div class="btn">
+      <span>File</span>
+      <input type="file" name="excel" />
+    </div>
+    <div class="file-path-wrapper">
+      <input class="file-path validate" type="text" />
+    </div>
+  </div>
+  <button type="submit">Enviar</button>
+</form>

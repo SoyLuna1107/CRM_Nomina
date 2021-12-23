@@ -1,0 +1,29 @@
+<div class='container_crearGerente container'>
+  <h2 class="center">Lista de Gerentes</h2>
+  <div class='row card-panel'>
+    <table id="tabla">
+      <thead>
+        <tr>
+          <th>Usuario</th>
+          <th>Nombre</th>
+          <th>Campaña</th>
+          <th>Documento</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each rowsGerentes}}
+          <tr>
+            <td>{{this.CRE_CUSUARIO}}</td>
+            <td>{{this.CRE_CNOMBRE}} {{this.CRE_CNOMBRE2}} {{this.CRE_CAPELLIDO}} {{this.CRE_CAPELLIDO2}} </td>
+            <td>{{this.PER_CCAMPANA}}</td>
+            <td>{{this.CRE_CDOCUMENTO}}</td>
+            <td class="center">
+              <a href="/nomina/viewActualizarGerente/{{this.PKCRE_NCODIGO}}" class="btn"><i class='bx bx-edit-alt'></i></a>
+            </td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+</div>

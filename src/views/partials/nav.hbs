@@ -1,0 +1,155 @@
+<!--========== NAV ==========-->
+<div class='nav' id='navbar'>
+  <div class='nav__container'>
+    <div>
+      <a href='/inicio' class='nav__link nav__logo'>
+        <i class='bx bxs-disc nav__icon'></i>
+        <span class='nav__logo-name'>Wasa</span>
+      </a>
+
+      <div class='nav__list'>
+        {{! <div class="nav__items">
+          <h3 class="nav__subtitle">Profile</h3>
+
+          <a href="#" class="nav__link active_link">
+            <i class="bx bx-home nav__icon"></i>
+            <span class="nav__name">Home</span>
+          </a>
+
+          <div class="nav__dropdown">
+            <a href="#" class="nav__link">
+              <i class="bx bx-user nav__icon"></i>
+              <span class="nav__name">Profile</span>
+              <i class="bx bx-chevron-down nav__icon nav__dropdown-icon"></i>
+            </a>
+
+            <div class="nav__dropdown-collapse">
+              <div class="nav__dropdown-content">
+                <a href="#" class="nav__dropdown-item">Passwords</a>
+                <a href="#" class="nav__dropdown-item">Mail</a>
+                <a href="#" class="nav__dropdown-item">Accounts</a>
+              </div>
+            </div>
+          </div>
+
+          <a href="#" class="nav__link">
+            <i class="bx bx-message-rounded nav__icon"></i>
+            <span class="nav__name">Messages</span>
+          </a>
+        </div> }}
+
+        <div class='nav__items'>
+          <h3 class='nav__subtitle'>Menu Administrador</h3>
+          {{! <div class="nav__dropdown">
+              <a href="#" class="nav__link">
+                <i class="bx bx-bell nav__icon"></i>
+                <span class="nav__name">Usuarios</span>
+                <i class="bx bx-chevron-down nav__icon nav__dropdown-icon"></i>
+              </a>
+
+              <div class="nav__dropdown-collapse">
+                <div class="nav__dropdown-content">
+                  <a href="#" class="nav__dropdown-item">Registrar</a>
+                  <a href="#" class="nav__dropdown-item">Actualizar</a>
+                </div>
+              </div>
+            </div> }}
+          <a href='/nomina/cargarExcel' class='nav__link'>
+            <i class='bx bx-send nav__icon'></i>
+            <span class='nav__name'>Cargue Masivo</span>
+          </a>
+          {{! USUARIOS }}
+          <div class='nav__dropdown'>
+            <a href='#' class='nav__link'>
+              <i class='bx bx-user nav__icon'></i>
+              <span class='nav__name'>Usuarios</span>
+              <i class='bx bx-chevron-down nav__icon nav__dropdown-icon'></i>
+            </a>
+
+            <div class='nav__dropdown-collapse'>
+              <div class='nav__dropdown-content'>
+                <a href='/nomina/crearUsuario' class='nav__dropdown-item'>Añadir</a>
+              </div>
+            </div>
+
+            <div class='nav__dropdown-collapse'>
+              <div class='nav__dropdown-content'>
+                <a href='/nomina/listaUsuarios' class='nav__dropdown-item'>Actualizar</a>
+              </div>
+            </div>
+          </div>
+
+          {{! CARGOS }}
+          <div class='nav__dropdown'>
+            <a href='#' class='nav__link'>
+              <i class='bx bx-briefcase nav__icon'></i>
+              <span class='nav__name'>Cargos</span>
+              <i class='bx bx-chevron-down nav__icon nav__dropdown-icon'></i>
+            </a>
+
+            <div class='nav__dropdown-collapse'>
+              <div class='nav__dropdown-content'>
+                <a href='/nomina/crearCargo' class='nav__dropdown-item'>Añadir</a>
+              </div>
+            </div>
+
+            <div class='nav__dropdown-collapse'>
+              <div class='nav__dropdown-content'>
+                <a href='/nomina/listaCargos' class='nav__dropdown-item'>Actualizar</a>
+              </div>
+            </div>
+          </div>
+          {{! NOMINA }}
+          <div class='nav__dropdown'>
+            <a href='#' class='nav__link'>
+              <i class='bx bxs-bank nav__icon'></i>
+              <span class='nav__name'>Nómina</span>
+              <i class='bx bx-chevron-down nav__icon nav__dropdown-icon'></i>
+            </a>
+
+            <div class='nav__dropdown-collapse'>
+              <div class='nav__dropdown-content'>
+                <a href='/nomina/nomListUsers' class='nav__dropdown-item'>Usuarios</a>
+              </div>
+            </div>
+
+            <div class='nav__dropdown-collapse'>
+              <div class='nav__dropdown-content'>
+                <a href='/nomina/nomListCampanas' class='nav__dropdown-item'>Campañas</a>
+              </div>
+            </div>
+          </div>
+          {{! GERENTES }}
+          <div class='nav__dropdown'>
+            <a href='#' class='nav__link'>
+              <i class='bx bx-user nav__icon'></i>
+              <span class='nav__name'>Gerentes</span>
+              <i class='bx bx-chevron-down nav__icon nav__dropdown-icon'></i>
+            </a>
+
+            <div class='nav__dropdown-collapse'>
+              <div class='nav__dropdown-content'>
+                <a href='/nomina/viewCrearGerente' class='nav__dropdown-item'>Crear</a>
+              </div>
+            </div>
+
+            <div class='nav__dropdown-collapse'>
+              <div class='nav__dropdown-content'>
+                <a href='/nomina/listGerentes' class='nav__dropdown-item'>Actualizar</a>
+              </div>
+            </div>
+          </div>
+          {{! <a href='/nomina/nomListUsers' class='nav__link'>
+            <i class='bx bxs-bank nav__icon'></i>
+            <span class='nav__name'>Nómina</span>
+          </a> }}
+        </div>
+      </div>
+    </div>
+
+    <a href='/logout' class='nav__link nav__logout'>
+      <i class='bx bx-log-out nav__icon'></i>
+      <span class='nav__name'>Cerrar Sesion</span>
+    </a>
+  </div>
+</div>

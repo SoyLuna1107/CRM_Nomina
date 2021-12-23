@@ -1,0 +1,47 @@
+<div class='container_crearGerente container'>
+  <div class='row'>
+    <h2 class='center'>Crear Gerente</h2>
+    <form action='/nomina/crearGerente' method='post' class='col s12'>
+      <div class='row card-panel'>
+        <div class='input-field col s4'>
+          <input type='text' name='CRE_CUSUARIO' id='CRE_CUSUARIO' />
+          <label for='CRE_CUSUARIO'>Usuario</label>
+        </div>
+        <div class='input-field col s4'>
+          <input type='text' name='CRE_CNOMBRE' id='CRE_CNOMBRE' />
+          <label for='CRE_CNOMBRE'>Primer Nombre <span class="red-text">*</span></label>
+        </div>
+        <div class='input-field col s4'>
+          <input type='text' name='CRE_CNOMBRE2' id='CRE_CNOMBRE2' />
+          <label for='CRE_CNOMBRE2'>Segundo Nombre</label>
+        </div>
+        <div class='input-field col s4'>
+          <input type='text' name='CRE_CAPELLIDO' id='CRE_CAPELLIDO' />
+          <label for='CRE_CAPELLIDO'>Primer Apellido <span class="red-text">*</span></label>
+        </div>
+        <div class='input-field col s4'>
+          <input type='text' name='CRE_CAPELLIDO2' id='CRE_CAPELLIDO2' />
+          <label for='CRE_CAPELLIDO2'>Segundo Apellido</label>
+        </div>
+        <div class='input-field col s4'>
+          <input type='text' name='CRE_CDOCUMENTO' id='CRE_CDOCUMENTO' />
+          <label for='CRE_CDOCUMENTO'>Cédula <span class="red-text">*</span></label>
+        </div>
+        <div class='input-field col s4'>
+          <select class='select' name='PER_CCAMPANA' id='PER_CCAMPANA'>
+            <option value='' disabled selected>Selecciona la opción</option>
+            {{#each rowsCamp}}
+              <option value='{{this.EST_CDETALLE1}}'>{{this.EST_CDETALLE1}}</option>
+            {{/each}}
+          </select>
+          <label for='PER_CCAMPANA'>Campaña <span class="red-text">*</span></label>
+        </div>
+      </div>
+      <div class='row center'>
+        <button class='btn' id="btnCrearGerente" type='submit'>Crear</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="/js/crearGerente.js"></script>

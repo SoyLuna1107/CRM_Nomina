@@ -1,0 +1,301 @@
+<div class="section container">
+    <div class="row">
+        <div class="displayNone" id="idUsuario">{{usuario.PKCON_NCODIGO}}</div>
+        
+        <form action="/nomina/actualizarUsuario/{{idEncrypt}}" method="post" class="col s12">
+            <div class="row card-panel">
+                
+                {{!-- ----Modalidad----- --}}
+                <div class="input-field col s4">
+        {{!-- <div class="displayNone" id="idUsuario"></div> --}}
+                    <select class="select" name="modalidad" id="modalidad">
+                        <option value="" disabled selected>Selecciona la opción</option>
+                        <option value="Site 1">Site 1</option> 
+                        <option value="Site 5">Site 5</option> 
+                        <option value="Site 6">Site 6</option> 
+                        <option value="Site 7">Site 7</option> 
+                        <option value="Medellin">Medellin</option> 
+                        <option value="Barrabquilla">Barranquilla</option> 
+                        <option value="Cra 30 (ECallYou)">Cra 30 (ECallYou)</option> 
+                        <option value="Calle 80">Calle 80</option> 
+                        <option value="Edificio Caracol">Edificio Caracol</option> 
+                        <option value="Home Office">Home Office</option> 
+                    </select>
+                    <label for="modalidad">Modalidad*</label>
+                </div>
+                {{!-- ----Campaña----- --}}
+                <div class="input-field col s4">
+                    <select class="select" name="campaña" id="campaña" multiple>
+                        <option value="" disabled>Selecciona la opción</option>
+                        {{#each usuarioAll}}
+                        <option id="optionCam" value="{{EST_CDETALLE1}}">{{EST_CDETALLE1}}</option> 
+                        {{/each}}
+                    </select>
+                    <label for="campaña">Campaña*</label>
+                </div>
+                {{!-- ----Cargo----- FALTA CARGAR LISTDO DESDE DB--}}
+                <div class="input-field col s4">
+                    <select class="select" name="cargo" id="cargo">
+                        <option value="" disabled selected>Selecciona la opción</option>
+                        <option value="">opcion</option> 
+                        <option value="">opcion</option> 
+                    </select>
+                    <label for="cargo">Cargo*</label>
+                </div>
+                {{!-- ----Login_ID----- --}}
+                <div class="input-field col s4">
+                    <input type="text" name="loguin_id" id="loguin_id" value="{{usuario.CON_CDETALLE5}}">
+                    <label for="loguin_id">Loguin ID*</label>
+                </div>
+                {{!-- -----Cedula---- --}}
+                <div class="input-field col s4">
+                    <input type="text" name="cedula_crear_us" id="cedula_crear_us" value="{{usuario.CON_CDETALLE6}}">
+                    <label for="cedula_crear_us">Cédula*</label>
+                </div>
+                {{!-- -----Nombre---- --}}
+                <div class="input-field col s4">
+                    <input type="text" name="full_name" id="full_name" value="{{usuario.CON_CDETALLE10}}">
+                    <label for="full_name">Nombre Completo*</label>
+                </div>
+                {{!-- ----Jefe Inmediato----- --}}
+                <div class="input-field col s4">
+                    <select class="select" name="jefe_inm" id="jefe_inm">
+                        <option value="" disabled selected>Selecciona la opción</option>
+                        {{#each jefesInm}}
+                        <option value="{{CON_CDETALLE12}}">{{CON_CDETALLE12}}</option> 
+                        {{/each}}
+                    </select>
+                    <label for="jefe_inm">Jefe Inmediato*</label>
+                </div>
+                {{!-- ----Jefe de operacion----- --}}
+                <div class="input-field col s4">
+                    <select class="select" name="jefe_ope" id="jefe_ope">
+                        <option value="" disabled selected>Selecciona la opción</option>
+                       {{#each jefesOpe}}
+                        <option value="{{CON_CDETALLE13}}">{{CON_CDETALLE13}}</option> 
+                        {{/each}}
+                    </select>
+                    <label for="jefe_ope">Jefe de Operación*</label>
+                </div>
+                {{!-- -----Tel fijo---- --}}
+                <div class="input-field col s4">
+                    <input type="text" name="tel_fijo" id="tel_fijo" value="{{usuario.CON_CDETALLE14}}">
+                    <label for="tel_fijo">Telefono fijo</label>
+                </div>
+                {{!-- -----Tel celular---- --}}
+                <div class="input-field col s4">
+                    <input type="text" name="tel_celular" id="tel_celular" value="{{usuario.CON_CDETALLE15}}">
+                    <label for="tel_celular">Telefono celular</label>
+                </div>
+                {{!--------Fecha nacimiento----------}}
+                <div class="input-field col s4">
+                    <input type="date" name="fecha_nacimiento" id="fecha_nacimiento" value="{{fechaNacimiento}}">
+                    <label for="fecha_nacimiento">Fecha de nacimiento</label>
+                </div>
+                {{!-- ----Sexo----- --}}
+                <div class="input-field col s4">
+                    <select class="select" name="sexo" id="sexo" value="{{usuario.CON_CDETALLE17}}">
+                        <option value="" disabled selected>Selecciona la opción</option>
+                        <option value="F">F</option> 
+                        <option value="M">M</option> 
+                    </select>
+                    <label for="sexo">Sexo</label>
+                </div>
+                {{!-- -----Direccion---- --}}
+                <div class="input-field col s4">
+                    <input type="text" name="direccion" id="direccion" value="{{usuario.CON_CDETALLE18}}">
+                    <label for="direccion">Dirección</label>
+                </div>
+                {{!-- ----Grupo Sanguineo----- --}}
+                <div class="input-field col s4">
+                    <select class="select" name="Grupo_sanguineo" id="Grupo_sanguineo">
+                        <option value="" disabled selected>Selecciona la opción</option>
+                        <option value="">A+</option> 
+                        <option value="">A-</option>
+                        <option value="">B+</option>
+                        <option value="">B-</option>
+                        <option value="">O+</option>
+                        <option value="">O-</option>
+                        <option value="">AB+</option>
+                        <option value="">AB-</option> 
+                    </select>
+                    <label for="Grupo_sanguineo">Grupo Sanguíneo</label>
+                </div>
+                {{!-- -----EPS--- select??? --}}
+                <div class="input-field col s4">
+                    <input type="text" name="eps" id="eps" value="{{usuario.CON_CDETALLE20}}">
+                    <label for="eps">EPS</label>
+                </div>
+                {{!-- -----Estado civil-----}}
+                <div class="input-field col s4">
+                    <select class="select" name="estado_civil" id="estado_civil">
+                        <option value="" disabled selected>Selecciona la opción</option>
+                        <option value="">Soltero</option> 
+                        <option value="">Casado</option>
+                        <option value="">Unión libre</option>
+                    </select>
+                    <label for="estado_civil">Estado civil</label>
+                </div>
+                {{!-- -----# de hijos--}}
+                <div class="input-field col s4">
+                    <input type="text" name="numero_hijos" id="numero_hijos" value="{{usuario.CON_CDETALLE22}}">
+                    <label for="numero_hijos">N° de hijos</label>
+                </div>
+                {{!--------Fecha ingreso--------se guarda automáticamente en el momento de guardar la persona ---}}
+                <div class="input-field col s4">
+                    <input type="date" name="fecha_ingreso" placeholder="Feha de ingreso" id="fecha_ingreso" value="{{fechaIngreso}}">
+                    <label for="fecha_ingreso">Fecha de ingreso a la campaña </label>
+                </div>
+                {{!--------Antiguedad en dias----------}}
+                <div class="input-field col s4">
+                    <input type="text" placeholder="Antiguedad en días" id="antiguedad_dias" readonly="readonly" value="{{antiguedadDias}}">
+                    <label for="antiguedad_dias">Antiguedad en días</label>
+                </div>
+
+                {{!--------Tipo de Antiguedad---------}}
+                <div class="input-field col s4">
+                    <input type="text" placeholder="Tipo de antiguedad" id="tipo_antiguedad" readonly="readonly" value="{{tipoAntiguedad}}">
+                    <label for="tipo_antiguedad">Tipo de antiguedad</label>
+                </div>
+
+                {{!-- -----Nivel de estudios  select??--}}
+                <div class="input-field col s4">
+                    <input type="text" name="estudios" id="estudios" value="{{usuario.CON_CDETALLE26}}">
+                    <label for="estudios">Nivel de Estudios</label>
+                </div>
+                {{!-- -----Usuario RR--}}
+                <div class="input-field col s4">
+                    <input type="text" name="usuario_rr" id="usuario_rr" value="{{usuario.CON_CDETALLE27}}">
+                    <label for="usuario_rr">Usuario RR*</label>
+                </div>
+                {{!-- -----Usuario Ac--}}
+                <div class="input-field col s4">
+                    <input type="text" name="usuario_Ac" id="usuario_Ac" value="{{usuario.CON_CDETALLE28}}">
+                    <label for="usuario_Ac">Usuario Ac*</label>
+                </div>
+                {{!-- -----correo--}}
+                <div class="input-field col s4">
+                    <input type="text" name="correo" id="correo" value="{{usuario.CON_CDETALLE29}}">
+                    <label for="correo">Correo*</label>
+                </div>
+
+               {{!-- ----Estado se calcula por fecha de retiro------}}
+                <div class="input-field col s4">
+                    <input type="text" name="estadoUsuario" id="estadoUsuario" readonly="readonly" value="{{usuario.CON_CESTADO}}">
+                    <label for="estadoUsuario">Estado</label>
+                </div>
+                {{!-- Fechas retiro --}}
+                <div class="input-field col s4">
+                    <input type="date" name="fecha_retiro" id="fecha_retiro" value="{{fechaRetiro}}">
+                    <label for="fecha_retiro">Fecha de retiro</label>
+                </div>
+
+                {{!-- -----causa de retiro--}}
+                <div class="input-field col s4">
+                    <select class="select" name="estado" id="causa-retiro">
+                        <option value="" disabled selected>Selecciona la opción</option>
+                        <option value="">BJ(Baja Justificada)</option> 
+                        <option value="">BV(Baja Voluntaria)</option> 
+                        <option value="">CC(Cambio de Campaña)</option>
+                        <option value="">OJT</option>
+                    </select>
+                    <label for="causa-retiro">Causa*</label>
+                </div>
+                {{!-- -----Detalle--}}
+                <div class="input-field col s4">
+                    <input type="text" name="detalle" id="detalle" value="{{usuario.CON_CDETALLE35}}">
+                    <label for="detalle">Detalle*</label>
+                </div>
+                {{!------Operador internet---}}
+                <div class="input-field col s4">
+                    <input type="text" name="internet_hogar" id="internet_hogar" value="{{usuario.CON_CDETALLE37}}">
+                    <label for="internet_hogar">Operador de internet HOGAR</label>
+                </div>
+                {{!------Megas de operador de internet Hogar---}}
+                <div class="input-field col s4">
+                    <input type="text" name="megas_internet_hogar" id="megas_internet_hogar" value="{{usuario.CON_CDETALLE38}}">
+                    <label for="">MEGAS</label>
+                </div>
+                {{!------Localidad---}}
+                <div class="input-field col s4">
+                    <input type="text" name="localidad" id="localidad" value="{{usuario.CON_CDETALLE39}}">
+                    <label for="localidad">Localidad</label>
+                </div>
+                {{!-----Barrio----}}
+                <div class="input-field col s4">
+                    <input type="text" name="barrio" id="barrio" value="{{usuario.CON_CDETALLE40}}">
+                    <label for="barrio">Barrio</label>
+                </div>
+                {{!------Usuario de red ---}}
+                <div class="input-field col s4">
+                    <input type="text" name="usuario_red" id="usuario_red" value="{{usuario.CON_CDETALLE44}}">
+                    <label for="usuario_red">Usuario de Red</label>
+                </div>
+
+                {{!------- Salario -------}}
+                <div class="input-field col s4">
+                    <input type="text" name="salario" id="salario" value="">
+                    <label for="salario">Salario</label>
+                </div>
+
+                {{!------Estado Vacunacion---}}
+                <div class="input-field col s4">
+                    <select class="select" name="vacunado" id="vacunado">
+                        <option value="" disabled selected>Selecciona la opción</option>
+                        <option value="">Vacunado</option> 
+                        <option value="">No Vacunado</option> 
+                    </select>
+                    <label for="vacunado">Estado Vacunación</label>
+                </div>
+                {{!------Vacuna aplicada ---}}
+                <div class="input-field col s4">
+                    <input type="text" name="vacuna_aplicada" id="vacuna_aplicada" value="{{usuario.CON_CDETALLE46}}">
+                    <label for="vacuna_aplicada">Vacuna aplicada</label>
+                </div>
+                {{!------Primera dosis---}}
+                <div class="input-field col s4">
+                    <select class="select" name="vac_primer_dosis" id="vac_primer_dosis" value="{{usuario.CON_CDETALLE47}}">
+                        <option value="" disabled selected>Selecciona la opción</option>
+                        <option value="">SI</option> 
+                        <option value="">NO</option> 
+                    </select>
+                    <label for="vac_primer_dosis">Primer dosis</label>
+                </div>
+                {{!------Segunda dosis---}}
+                <div class="input-field col s4">
+                    <select class="select" name="vac_segunda_dosis" id="vac_segunda_dosis" value="{{usuario.CON_CDETALLE48}}">
+                        <option value="" disabled selected>Selecciona la opción</option>
+                        <option value="">SI</option> 
+                        <option value="">NO</option> 
+                    </select>
+                    <label for="vac_segunda_dosis">Segunda dosis</label>
+                </div>
+                {{!------Tercera dosis---}}
+                <div class="input-field col s4">
+                    <select class="select" name="vac_tercer_dosis" id="vac_tercer_dosis" value="{{usuario.CON_CDETALLE49}}">
+                        <option value="" disabled selected>Selecciona la opción</option>
+                        <option value="">SI</option> 
+                        <option value="">NO</option> 
+                    </select>
+                    <label for="vac_tercer_dosis">Tercera dosis</label>
+                </div>
+
+                <div class="input-field col s12">
+                    <div class="input-field col s4"></div>
+
+                    <div class="input-field col s4">
+                        <button class="btn waves-effect waves-light" type="submit" name="action">Guardar
+                            <i class="material-icons right">send</i>
+                        </button>
+                    </div>
+
+                    <div class="input-field col s4"></div>
+
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="/js/actualizarUsuario.js"></script>
