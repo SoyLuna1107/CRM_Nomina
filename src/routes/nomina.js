@@ -563,7 +563,7 @@ router.post("/crearCampania", (req, res) => {
     EST_CDETALLE5:"",
     EST_CDETALLE6:"",
     EST_CDETALLE7:"",
-    EST_CDETALLE_REGISTRO:"'Registro Por Sistema'",
+    EST_CDETALLE_REGISTRO:"Registro Por Sistema",
     EST_CESTADO:"Activo",
   }
 
@@ -756,22 +756,116 @@ router.get("/nomListCampanas", (req, res) => {
 
       ArrayCampanas = [];
       for (let index = 0; index < resultCampanias.length; index++) {
-        const sqlCountCampanias = "SELECT CON_CDETALLE2, count(*) as numero from dbp_nomina.TBL_RCONTENIDO WHERE CON_CDETALLE2 = ?";
-
-        // console.log(element.EST_CDETALLE1);
+        const sqlCountCampanias = "SELECT count(*) as numero from dbp_nomina.TBL_RCONTENIDO WHERE CON_CDETALLE2 like '%"+resultCampanias[index].EST_CDETALLE1+"%'";
+        
         await db
           .promise()
           .query(sqlCountCampanias, resultCampanias[index].EST_CDETALLE1)
           .then(([resultCountCampanias2]) => {
-            if (resultCountCampanias2[0].CON_CDETALLE2 != null) {
-              countCampanias.push(resultCountCampanias2);
+            if (resultCountCampanias2[0].numero != null) {
+              let campania = {
+                campania:resultCampanias[index].EST_CDETALLE1,
+                numero: resultCountCampanias2[0].numero,
+                dinero: 0
+              }
+              countCampanias.push(campania);
             }
           });
       }
-      console.log(countCampanias);
+      const sqlDinero = "SELECT CON_CDETALLE2 as campania, CON_CDETALLE50 as dinero FROM dbp_nomina.TBL_RCONTENIDO ORDER BY CON_CDETALLE2";
+
+        await db
+          .promise()
+          .query(sqlDinero)
+          .then(([resultPersona]) => {
+            var indexCountCamp = [0,""];
+            var persona = {dinero:0,campanias:[], total:0};
+            //Recorrer cada persona
+            for (let index = 0; index < resultPersona.length; index++) {
+              persona.campanias = [];
+              persona.total = 0;
+              persona.dinero = parseInt(resultPersona[index].dinero);
+              //generar array por si la persona tiene mas de 1 campania asignada
+              campania = resultPersona[index].campania.split(",");
+
+              //Recorrer las campanias de la persona
+              for (let i = 0; i < campania.length; i++) {
+                
+                //Si la campania actual de la persona es igual a la temporal
+                if (campania[i] == indexCountCamp[1]){
+                  persona.total +=countCampanias[indexCountCamp[0]].numero;
+                  persona.campanias.push([campania[i], countCampanias[indexCountCamp[0]].numero]);
+                }else{
+                  //Buscar la nueva campania
+                  for (let b = 0; b < countCampanias.length; b++) {
+                    //Si la campania del conteo es igual a la de la persona actual
+                    if(countCampanias[b].campania == campania[i]){
+                      indexCountCamp[0] = b;
+                      indexCountCamp[1] = countCampanias[b].campania;
+                      i --;
+                      //console.log(indexCountCamp);
+                      break;
+                    }
+                    
+                  }
+                }
+
+              }
+              
+            for (let c = 0; c < persona.campanias.length; c++) {
+              var dinero = 0;
+              var porcet = 0;
+              porcet = (parseInt(persona.campanias[c][1])/persona.total)*100;
+              dinero = (porcet*persona.dinero)/100;
+              if (persona.campanias[c][0] == indexCountCamp[1]){
+                countCampanias[indexCountCamp[0]].dinero += dinero;
+              
+              }else{
+              //Buscar la nueva campania
+                for (let b = 0; b < countCampanias.length; b++) {
+                  //Si la campania del conteo es igual a la de la persona actual
+                  if(countCampanias[b].campania == persona.campanias[c][0]){
+                    indexCountCamp[0] = b;
+                    indexCountCamp[1] = countCampanias[b].campania;
+                    c --;
+                    break;
+                  }
+                }  
+              }
+            }
+            }  
+          });
+      //console.log(countCampanias);
       res.render("nomina/nomListCampanas", { title: "Nomina Campañas", countCampanias });
     });
 });
+
+// router.get("/nomListCampanas", (req, res) => {
+//   const sqlCampanias = "SELECT EST_CDETALLE1 FROM dbp_nomina.TBL_RESTANDAR WHERE EST_CCONSULTA='cmbCampaña' ORDER BY EST_CDETALLE1 asc";
+
+//   db.promise()
+//     .query(sqlCampanias)
+//     .then(async ([resultCampanias]) => {
+//       let countCampanias = [];
+
+//       ArrayCampanas = [];
+//       for (let index = 0; index < resultCampanias.length; index++) {
+//         const sqlCountCampanias = "SELECT CON_CDETALLE2, count(*) as numero from dbp_nomina.TBL_RCONTENIDO WHERE CON_CDETALLE2 = ?";
+
+//         // console.log(element.EST_CDETALLE1);
+//         await db
+//           .promise()
+//           .query(sqlCountCampanias, resultCampanias[index].EST_CDETALLE1)
+//           .then(([resultCountCampanias2]) => {
+//             if (resultCountCampanias2[0].CON_CDETALLE2 != null) {
+//               countCampanias.push(resultCountCampanias2);
+//             }
+//           });
+//       }
+//       console.log(countCampanias);
+//       res.render("nomina/nomListCampanas", { title: "Nomina Campañas", countCampanias });
+//     });
+// });
 
 // router.get("/nomListCampanas", (req, res) => {
 //   const sqlCampañas = "SELECT EST_CDETALLE1 FROM dbp_nomina.TBL_RESTANDAR WHERE EST_CCONSULTA='cmbCampaña' ORDER BY EST_CDETALLE1 asc";

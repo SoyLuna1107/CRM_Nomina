@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', (req, res) => {
 
   btnCrearGerente.addEventListener(
     'click',
-    async (e) => {
+    (e) => {
       let errorMessage = '';
 
       // * Validar si Ingreso Primer Nombre
@@ -28,8 +28,8 @@ document.addEventListener('DOMContentLoaded', (req, res) => {
 
       // * Validar si el Gerente ta existe - Por CC
 
-      let res = await postData('/nomina/gerenteCC', { CRE_CDOCUMENTO: CRE_CDOCUMENTO.value })
-      let existeGerente = await res.length
+      let res =  postData('/nomina/gerenteCC', { CRE_CDOCUMENTO: CRE_CDOCUMENTO.value });
+      let existeGerente =  res.length;
       if (existeGerente) errorMessage = 'El usuario ya existe';
 
       if (errorMessage) {

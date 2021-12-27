@@ -13,57 +13,94 @@ router.get('/viewCrearGerente', async (req, res) => {
   res.render('nomina/crearGerente', { title: 'Crear Gerente', rowsCamp });
 });
 
-router.post('/crearGerente', (req, res) => {
-  console.log(req.body);
-  const dataCredencial = {
-    CRE_CUSUARIO: req.body.CRE_CUSUARIO || `${req.body.CRE_CNOMBRE}.${req.body.CRE_CAPELLIDO}`,
-    CRE_CNOMBRE: req.body.CRE_CNOMBRE || null,
-    CRE_CNOMBRE2: req.body.CRE_CNOMBRE2 || null,
-    CRE_CAPELLIDO: req.body.CRE_CAPELLIDO || null,
-    CRE_CAPELLIDO2: req.body.CRE_CAPELLIDO2 || null,
-    CRE_CDOCUMENTO: req.body.CRE_CDOCUMENTO || null,
-    CRE_CDETALLE_REGISTRO: 'Registrado por el Sistema',
-    CRE_CESTADO: 'Activo',
-  };
-  // * Registrar Psicologo
-  const sqlInsertCredencial = 'INSERT INTO dbp_nomina.TBL_RCREDENCIAL SET ?';
-  db.promise()
-    .query(sqlInsertCredencial, [dataCredencial])
-    .then(([resultInsertCredencial]) => {
-      if (resultInsertCredencial.insertId) {
-        const dataRPermiso = {
-          FKPER_CUSUARIOS: resultInsertCredencial.insertId,
-          PER_CDOCUMENTO: req.body.CRE_CDOCUMENTO || null,
-          PER_CNIVEL: 'GERENTE', // *
-          PER_CCAMPANA: req.body.PER_CCAMPANA || null,
-          PER_CDETALLE_REGISTRO: 'Registrado por el Sistema',
-          PER_CESTADO: 'Activo',
-        };
-        const sqlInsertRPermiso = 'INSERT INTO dbp_nomina.TBL_RPERMISO SET ?';
-        db.promise()
-          .query(sqlInsertRPermiso, [dataRPermiso])
-          .then(([resultInsertRPermiso]) => {
-            console.log(`${dataCredencial.CRE_CUSUARIO} - Registrado. - IDCredencial: ${resultInsertCredencial.insertId} - IDRPermiso: ${resultInsertRPermiso.insertId}`);
-            req.flash('messageSuccess', `Registrado Exitosamente`);
-            res.redirect('/nomina/viewCrearGerente');
-          })
-          .catch((err) => console.log('ERROR::', err));
-      }
-    })
-    .catch((err) => console.log('ERROR::', err));
-});
+// router.post('/crearGerente', (req, res) => {
+//   console.log(req.body);
+//   const dataCredencial = {
+//     CRE_CUSUARIO: req.body.CRE_CUSUARIO || `${req.body.CRE_CNOMBRE}.${req.body.CRE_CAPELLIDO}`,
+//     CRE_CNOMBRE: req.body.CRE_CNOMBRE || null,
+//     CRE_CNOMBRE2: req.body.CRE_CNOMBRE2 || null,
+//     CRE_CAPELLIDO: req.body.CRE_CAPELLIDO || null,
+//     CRE_CAPELLIDO2: req.body.CRE_CAPELLIDO2 || null,
+//     CRE_CDOCUMENTO: req.body.CRE_CDOCUMENTO || null,
+//     CRE_CDETALLE_REGISTRO: 'Registrado por el Sistema',
+//     CRE_CESTADO: 'Activo',
+//   };
+//   // * Registrar Psicologo
+//   const sqlInsertCredencial = 'INSERT INTO dbp_nomina.TBL_RCREDENCIAL SET ?';
+//   db.promise()
+//     .query(sqlInsertCredencial, [dataCredencial])
+//     .then(([resultInsertCredencial]) => {
+//       if (resultInsertCredencial.insertId) {
+//         const dataRPermiso = {
+//           FKPER_CUSUARIOS: resultInsertCredencial.insertId,
+//           PER_CDOCUMENTO: req.body.CRE_CDOCUMENTO || null,
+//           PER_CNIVEL: 'GERENTE', // *
+//           PER_CCAMPANA: req.body.PER_CCAMPANA || null,
+//           PER_CDETALLE_REGISTRO: 'Registrado por el Sistema',
+//           PER_CESTADO: 'Activo',
+//         };
+//         const sqlInsertRPermiso = 'INSERT INTO dbp_nomina.TBL_RPERMISO SET ?';
+//         db.promise()
+//           .query(sqlInsertRPermiso, [dataRPermiso])
+//           .then(([resultInsertRPermiso]) => {
+//             console.log(`${dataCredencial.CRE_CUSUARIO} - Registrado. - IDCredencial: ${resultInsertCredencial.insertId} - IDRPermiso: ${resultInsertRPermiso.insertId}`);
+//             req.flash('messageSuccess', `Registrado Exitosamente`);
+//             res.redirect('/nomina/viewCrearGerente');
+//           })
+//           .catch((err) => console.log('ERROR::', err));
+//       }
+//     })
+//     .catch((err) => console.log('ERROR::', err));
+// });
 
-/* router.post('/crearGerente', (req, res) =>{
+router.post('/crearGerente', async(req, res) =>{
+  let errorMessage = 0;
+
   const dataCredencial = {
     FKPER_CUSUARIOS: req.body.CRE_CUSUARIO || null,
     PER_CDOCUMENTO: req.body.CRE_CDOCUMENTO || null,
     PER_CNIVEL: 'GERENTE',
+    PER_CNOMBRE: `${req.body.CRE_CNOMBRE} ${req.body.CRE_CNOMBRE2} ${req.body.CRE_CAPELLIDO} ${req.body.CRE_CAPELLIDO2}`,
     PER_CDETALLE_REGISTRO: 'Registrado por el Sistema',
     PER_CESTADO: 'Activo',
   };
+  // const sqlSearch = "SELECT * FROM TBL_RPERMISO WHERE PER_CDOCUMENTO = ?";
+
+  //  db.promise()
+
+  //   .query(sqlSearch,[dataCredencial.PER_CDOCUMENTO])
+  //   .then(([resultSearch]) => {
+      
+      
+  //     if(resultSearch.length>0){
+  //       errorMessage = 1;
+  //       req.flash('messageError', `El Gerente ya existe`);
+  //     } else{
+  //       console.log('aún no existe');
+  //     }
+      
+      
+  //     // resultSearch.forEach(element => {
+  //     //   // console.log('CC',element.PER_CDOCUMENTO);
+  //     // });
+  //   })
+   
+    
+    // .catch((err) => console.log("ERROR::", err));
+    // req.flash('messageError', `El Gerente ya existe`)
+    // req.flash('messageSuccess', `Registrado Exitosamente`);
+    // console.log(errorMessage);
+   
+    // if(errorMessage>0){
+    //   req.flash('messageSuccess', `Registrado Exitosamente`);
+      // req.flash('messageError', 'El gerente ya existe');
+    // }
+    
+
+  
   
   const sqlInsertCredencial = 'INSERT INTO dbp_nomina.TBL_RPERMISO SET ?';
-  db.promise()
+  await db.promise()
 
     .query(sqlInsertCredencial, [dataCredencial])
     .then(([result]) => {
@@ -73,7 +110,7 @@ router.post('/crearGerente', (req, res) => {
     .catch((err) => console.log("ERROR::", err));
 
 });
- */
+ 
 // * Ruta para buscar un usuario por cedula en TBL_RCREDENCIAL
 router.post('/gerenteCC', async (req, res) => {
   const { CRE_CDOCUMENTO } = req.body;
