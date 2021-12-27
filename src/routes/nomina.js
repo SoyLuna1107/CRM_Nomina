@@ -532,6 +532,54 @@ router.post("/getUsuarioID", (req, res) => {
     .catch((err) => console.log("ERROR::", err));
 });
 
+//-------------CAMPAÑAS----------------------
+router.get("/crearCampania", (req, res) => {
+  const sqlCampañas = "SELECT EST_CDETALLE1 FROM dbp_nomina.TBL_RESTANDAR WHERE EST_CCONSULTA='cmbCampaña' ORDER BY EST_CDETALLE1 asc";
+  db.promise()
+
+    .query(sqlCampañas)
+    .then(([result]) => {
+      //console.log(result);
+      res.render("nomina/crearCampania", {title: "Crear Campaña"})
+    })
+    .catch((err) => console.log("ERROR::", err));
+});
+router.post("/crearCampania", (req, res) => {
+  const{
+    new_Campania,
+    name_Gerente,
+    name_Gerenteope,
+    name_Jefeope,
+    name_coordinador,
+    name_supervisor,
+  } = req.body
+  const newCampania={
+    EST_CCONSULTA:"cmbCampaña",
+    EST_CDETALLE:"",
+    EST_CDETALLE1:new_Campania,
+    EST_CDETALLE2:"",
+    EST_CDETALLE3:"",
+    EST_CDETALLE4:"",
+    EST_CDETALLE5:"",
+    EST_CDETALLE6:"",
+    EST_CDETALLE7:"",
+    EST_CDETALLE_REGISTRO:"'Registro Por Sistema'",
+    EST_CESTADO:"Activo",
+  }
+
+  const sqlNewCampania = "INSERT INTO dbp_nomina.TBL_RESTANDAR SET ?";
+  db.promise()
+
+    .query(sqlNewCampania, [newCampania])
+    .then(([result]) => {
+      // console.log(result);
+    })
+    .catch((err) => console.log("ERROR::", err));
+
+  res.send("recibido");
+});
+
+
 // ---------------------------CARGOS-----------------
 router.get("/crearCargo", (req, res) => {
   const sqlAreas = "SELECT EST_CDETALLE1 FROM dbp_nomina.TBL_RESTANDAR WHERE EST_CCONSULTA='cmbCargo' GROUP BY EST_CDETALLE1 ORDER BY EST_CDETALLE1 asc";

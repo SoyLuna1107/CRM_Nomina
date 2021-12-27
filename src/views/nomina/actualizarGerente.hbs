@@ -1,6 +1,6 @@
 <div class='container_crearGerente container'>
   <div class='row'>
-    <h2 class='center'>Crear Gerente</h2>
+    <h2 class='center'>Actualizar Gerente</h2>
     <form action='/nomina/actualizarGerente/{{dataGerente.PKCRE_NCODIGO}}' method='post' class='col s12'>
       <div class='row card-panel'>
         <div class="displayNone" id="idGerente">{{dataGerente.PKCRE_NCODIGO}}</div>
@@ -29,8 +29,8 @@
           <label for='CRE_CDOCUMENTO'>Cédula <span class="red-text">*</span></label>
         </div>
         <div class='input-field col s4'>
-          <select class='select' name='PER_CCAMPANA' id='PER_CCAMPANA'>
-            <option value='' disabled selected>Selecciona la opción</option>
+          <select class='select' name='PER_CCAMPANA' id='PER_CCAMPANA' multiple>
+            <option value='' disabled>Selecciona la opción</option>
             {{#each rowsCamp}}
               <option value='{{this.EST_CDETALLE1}}'>{{this.EST_CDETALLE1}}</option>
             {{/each}}

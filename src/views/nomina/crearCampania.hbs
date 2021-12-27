@@ -1,0 +1,58 @@
+<div class='container_crearGerente container'>
+  <div class='row'>
+    <h2 class='center'>Crear Campaña</h2>
+    <form action='/nomina/crearCampania' method='post' class='col s12'>
+      <div class='row card-panel'>
+        <div class='input-field col s4'>
+          <input type='text' name='new_Campania' id='new_Campania' />
+          <label for='new_Campania'>Nombre de Campaña</label>
+        </div>
+        {{!-- traer los nombres de los gerentes --}}
+        <div class='input-field col s4'>
+          <select class='select' name='name_Gerente' id='name_Gerente' multiple>
+            <option value='' disabled>Selecciona la opción</option>
+            {{#each rowsCamp}}
+              <option value='{{this.EST_CDETALLE1}}'>{{this.EST_CDETALLE1}}</option>
+            {{/each}}
+          </select>
+          <label for='name_Gerente'>Gerente de Cuentas <span class="red-text">*</span></label>
+        </div>
+        {{!-- Gerente de operacion --}}
+        <div class='input-field col s4'>
+          <select class='select' name='name_Gerenteope' id='name_Gerenteope' multiple>
+            <option value='' disabled>Selecciona la opción</option>
+            {{#each rowsCamp}}
+              <option value='{{this.EST_CDETALLE1}}'>{{this.EST_CDETALLE1}}</option>
+            {{/each}}
+          </select>
+          <label for='name_Gerenteope'>Gerente de Operación <span class="red-text">*</span></label>
+        </div>
+         {{!-- Jefe de operacion --}}
+        <div class='input-field col s4'>
+          <select class='select' name='name_Jefeope' id='name_Jefeope' multiple>
+            <option value='' disabled>Selecciona la opción</option>
+            {{#each rowsCamp}}
+              <option value='{{this.EST_CDETALLE1}}'>{{this.EST_CDETALLE1}}</option>
+            {{/each}}
+          </select>
+          <label for='name_Jefeope'>Jefe de Operación <span class="red-text">*</span></label>
+        </div>
+        {{!-- coordinador --}}
+        <div class='input-field col s4'>
+          <input type='text' name='name_coordinador' id='name_coordinador' />
+          <label for='name_coordinador'>Coordinador</label>
+        </div>
+        {{!-- coordinador --}}
+        <div class='input-field col s4'>
+          <input type='text' name='name_supervisor' id='name_supervisor' />
+          <label for='name_supervisor'>Supervisor</label>
+        </div>
+      </div>
+      <div class='row center'>
+        <button class='btn' id="btnCrearGerente" type='submit'>Crear</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="/js/crearCampania.js"></script>

@@ -53,16 +53,38 @@ router.post('/crearGerente', (req, res) => {
     .catch((err) => console.log('ERROR::', err));
 });
 
+/* router.post('/crearGerente', (req, res) =>{
+  const dataCredencial = {
+    FKPER_CUSUARIOS: req.body.CRE_CUSUARIO || null,
+    PER_CDOCUMENTO: req.body.CRE_CDOCUMENTO || null,
+    PER_CNIVEL: 'GERENTE',
+    PER_CDETALLE_REGISTRO: 'Registrado por el Sistema',
+    PER_CESTADO: 'Activo',
+  };
+  
+  const sqlInsertCredencial = 'INSERT INTO dbp_nomina.TBL_RPERMISO SET ?';
+  db.promise()
+
+    .query(sqlInsertCredencial, [dataCredencial])
+    .then(([result]) => {
+      req.flash('messageSuccess', `Registrado Exitosamente`);
+      res.redirect('/nomina/viewCrearGerente');
+    })
+    .catch((err) => console.log("ERROR::", err));
+
+});
+ */
 // * Ruta para buscar un usuario por cedula en TBL_RCREDENCIAL
 router.post('/gerenteCC', async (req, res) => {
   const { CRE_CDOCUMENTO } = req.body;
-  const sqlSelect = 'SELECT * FROM TBL_RCREDENCIAL WHERE CRE_CDOCUMENTO = ?';
+  const sqlSelect = 'SELECT * FROM TBL_RPERMISO WHERE PER_CDOCUMENTO = ?';
   let [rows] = await db.promise().query(sqlSelect, [CRE_CDOCUMENTO]);
   res.json(rows);
 });
 
 router.get('/listGerentes', async (req, res) => {
-  const sql = `SELECT * FROM TBL_RCREDENCIAL INNER JOIN TBL_RPERMISO ON TBL_RCREDENCIAL.PKCRE_NCODIGO = TBL_RPERMISO.FKPER_CUSUARIOS WHERE PER_CNIVEL = 'GERENTE'`;
+  //const sql = `SELECT * FROM TBL_RCREDENCIAL INNER JOIN TBL_RPERMISO ON TBL_RCREDENCIAL.PKCRE_NCODIGO = TBL_RPERMISO.FKPER_CUSUARIOS WHERE PER_CNIVEL = 'GERENTE'`;
+  const sql = `SELECT * FROM TBL_RPERMISO WHERE PER_CNIVEL = 'GERENTE'`;
   let [rowsGerentes] = await db.promise().query(sql);
   res.render('nomina/listGerentes', { title: 'Lista de Gerentes', rowsGerentes });
 });
