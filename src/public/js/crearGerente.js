@@ -15,6 +15,8 @@ document.addEventListener('DOMContentLoaded', (req, res) => {
   btnCrearGerente.addEventListener(
     'click',
     (e) => {
+      
+
       let errorMessage = '';
 
       // * Validar si Ingreso Primer Nombre
@@ -27,8 +29,7 @@ document.addEventListener('DOMContentLoaded', (req, res) => {
       if (!PER_CCAMPANA.value) errorMessage = 'Por Favor Ingrese Campaña';
 
       // * Validar si el Gerente ta existe - Por CC
-
-      let res =  postData('/nomina/gerenteCC', { CRE_CDOCUMENTO: CRE_CDOCUMENTO.value });
+      let res =  postData('/nomina/gerenteCC', { PER_CDOCUMENTO: CRE_CDOCUMENTO.value });
       let existeGerente =  res.length;
       if (existeGerente) errorMessage = 'El usuario ya existe';
 
@@ -39,6 +40,7 @@ document.addEventListener('DOMContentLoaded', (req, res) => {
         });
       e.preventDefault();
       }
+      
     },
     false
   );

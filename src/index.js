@@ -73,6 +73,7 @@ app.use(require('./routes'));
 // ! app.use(isLoggedIn); // No entrar a las rutas sin logearse, redirecciona al Login
 app.use(require('./routes/user'));
 app.use('/nomina', require('./routes/nomina'));
+app.use('/nomina', require('./routes/nominaP'));
 app.use('/nomina', require('./routes/nominaE'));
 
 // * Starting Server

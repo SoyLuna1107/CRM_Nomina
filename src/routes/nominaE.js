@@ -53,7 +53,7 @@ router.get('/viewCrearGerente', async (req, res) => {
 //     .catch((err) => console.log('ERROR::', err));
 // });
 
-router.post('/crearGerente', async(req, res) =>{
+router.post('/crearGerente', (req, res) =>{
   let errorMessage = 0;
 
   const dataCredencial = {
@@ -64,60 +64,57 @@ router.post('/crearGerente', async(req, res) =>{
     PER_CDETALLE_REGISTRO: 'Registrado por el Sistema',
     PER_CESTADO: 'Activo',
   };
-  // const sqlSearch = "SELECT * FROM TBL_RPERMISO WHERE PER_CDOCUMENTO = ?";
+  const sqlSearch = "SELECT * FROM TBL_RPERMISO WHERE PER_CDOCUMENTO = ?";
 
-  //  db.promise()
+   db.promise()
 
-  //   .query(sqlSearch,[dataCredencial.PER_CDOCUMENTO])
-  //   .then(([resultSearch]) => {
+    .query(sqlSearch,[dataCredencial.PER_CDOCUMENTO])
+    .then(([resultSearch]) => {
       
       
-  //     if(resultSearch.length>0){
-  //       errorMessage = 1;
-  //       req.flash('messageError', `El Gerente ya existe`);
-  //     } else{
-  //       console.log('aún no existe');
-  //     }
+      if(resultSearch.length>0){
+        errorMessage = 1;
+        // req.flash('messageError', `El Gerente ya existe`);
+      } else{
+        console.log('aún no existe');
+      }
       
       
-  //     // resultSearch.forEach(element => {
-  //     //   // console.log('CC',element.PER_CDOCUMENTO);
-  //     // });
-  //   })
-   
-    
-    // .catch((err) => console.log("ERROR::", err));
-    // req.flash('messageError', `El Gerente ya existe`)
-    // req.flash('messageSuccess', `Registrado Exitosamente`);
-    // console.log(errorMessage);
-   
-    // if(errorMessage>0){
-    //   req.flash('messageSuccess', `Registrado Exitosamente`);
-      // req.flash('messageError', 'El gerente ya existe');
-    // }
-    
-
-  
-  
-  const sqlInsertCredencial = 'INSERT INTO dbp_nomina.TBL_RPERMISO SET ?';
-  await db.promise()
-
-    .query(sqlInsertCredencial, [dataCredencial])
-    .then(([result]) => {
-      req.flash('messageSuccess', `Registrado Exitosamente`);
-      res.redirect('/nomina/viewCrearGerente');
+      // resultSearch.forEach(element => {
+      //   // console.log('CC',element.PER_CDOCUMENTO);
+      // });
     })
+   
+    
     .catch((err) => console.log("ERROR::", err));
+    req.flash('messageSuccess', `Registrado Exitosamente`)
+    // req.flash('messageError', `El Gerente ya existe`)
+    // req.flash('messageSuccess', `Registrado Exitosamente`)
+    // console.log(errorMessage)
+   
+    
+
+  
+  
+  // const sqlInsertCredencial = 'INSERT INTO dbp_nomina.TBL_RPERMISO SET ?';
+  // await db.promise()
+
+  //   .query(sqlInsertCredencial, [dataCredencial])
+  //   .then(([result]) => {
+  //     req.flash('messageSuccess', `Registrado Exitosamente`);
+  //     res.redirect('/nomina/viewCrearGerente');
+  //   })
+  //   .catch((err) => console.log("ERROR::", err));
 
 });
  
 // * Ruta para buscar un usuario por cedula en TBL_RCREDENCIAL
-router.post('/gerenteCC', async (req, res) => {
-  const { CRE_CDOCUMENTO } = req.body;
-  const sqlSelect = 'SELECT * FROM TBL_RPERMISO WHERE PER_CDOCUMENTO = ?';
-  let [rows] = await db.promise().query(sqlSelect, [CRE_CDOCUMENTO]);
-  res.json(rows);
-});
+// router.post('/gerenteCC',async (req, res) => {
+//   const PER_CDOCUMENTO = req.body.CRE_CDOCUMENTO;
+//   const sqlSelect = 'SELECT * FROM TBL_RPERMISO WHERE PER_CDOCUMENTO = ?';
+//   let [rows] = await db.promise().query(sqlSelect, [PER_CDOCUMENTO]);
+//   res.json(rows);
+// });
 
 router.get('/listGerentes', async (req, res) => {
   //const sql = `SELECT * FROM TBL_RCREDENCIAL INNER JOIN TBL_RPERMISO ON TBL_RCREDENCIAL.PKCRE_NCODIGO = TBL_RPERMISO.FKPER_CUSUARIOS WHERE PER_CNIVEL = 'GERENTE'`;
