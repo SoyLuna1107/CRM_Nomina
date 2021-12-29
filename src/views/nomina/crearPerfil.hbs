@@ -7,7 +7,12 @@
                  {{!-- ----Login_ID----- --}}
                 <div class="input-field col s4">
                     <input type="text" name="loguin_id" id="loguin_id">
-                    <label for="loguin_id">Usuario de Red<span class="red-text">*</span></label>
+                    <label for="loguin_id">Login ID<span class="red-text">*</span></label>
+                </div>
+                 {{!------Usuario de red ---}}
+                <div class="input-field col s4">
+                    <input type="text" name="usuario_red" id="usuario_red">
+                    <label for="usuario_red">Usuario de Red</label>
                 </div>
                 {{!-- ----Modalidad----- --}}
                 <div class="input-field col s4">
@@ -31,7 +36,7 @@
                     <select class="select" name="campaña" id="campaña">
                         <option value="" disabled selected>Selecciona la opción</option>
                         {{#each dataCampanas}}
-                        <option value="{{EST_CDETALLE1}}">{{EST_CDETALLE1}}</option> 
+                        <option value="{{EST_CDETALLE}}">{{EST_CDETALLE}}</option> 
                         {{/each}}
                     </select>
                     <label for="campaña">Campaña<span class="red-text">*</span></label>
@@ -220,11 +225,7 @@
                     <input type="text" name="barrio" id="barrio">
                     <label for="barrio">Barrio</label>
                 </div>
-                {{!------Usuario de red ---}}
-                <div class="input-field col s4">
-                    <input type="text" name="usuario_red" id="usuario_red">
-                    <label for="usuario_red">Usuario de Red</label>
-                </div>
+               
                 {{!------Estado Vacunacion---}}
                 <div class="input-field col s4">
                     <select class="select" name="vacunado" id="vacunado">
